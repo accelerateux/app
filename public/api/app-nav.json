@@ -1,0 +1,55 @@
+{
+  "main": [
+    {
+      "uid": "home-id",
+      "label": "Home",
+      "path": "/home",
+      "icon": {
+        "class": "fds-icon fds-icon--size-2",
+        "path": "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+      },
+      "hasChild": "false" 
+    },
+    {
+      "uid": "discovery-id",
+      "label": "Discovery",
+      "path": "/discovery",
+      "icon": {
+        "class": "fds-icon fds-icon--size-2",
+        "path": "M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+      },
+      "hasChild": "false" 
+    },
+    {
+      "uid": "prototype-id",
+      "label": "Prototype",
+      "path": "/prototype",
+      "icon": {
+        "class": "fds-icon fds-icon--size-2",
+        "path": "M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"
+      },
+      "hasChild": "false" 
+    },
+    {
+      "uid": "testing-id",
+      "label": "Testing",
+      "path": "/testing",
+      "icon": {
+        "class": "fds-icon fds-icon--size-2",
+        "path": "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z"
+      },
+      "hasChild": "false" 
+    },
+    {
+      "uid": "analyze-id",
+      "label": "Analyze",
+      "path": "/analyze",
+      "icon": {
+        "class": "fds-icon fds-icon--size-2",
+        "path": "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+      },
+      "hasChild": "false" 
+    }
+  ]
+  
+}
