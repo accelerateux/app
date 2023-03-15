@@ -1,0 +1,30 @@
+{
+  "main": [
+    {
+      "uid": "about-id",
+      "label": "About",
+      "path": "/about",
+      "hasChild": "false" 
+    },
+    {
+      "uid": "pricing-id",
+      "label": "Pricing",
+      "path": "/pricing",
+      "hasChild": "false" 
+    },
+    {
+      "uid": "login-id",
+      "label": "Login",
+      "path": "/login",
+      "hasChild": "false" 
+    }
+  ],
+  "side": [
+    {
+      "uid": "sign-id",
+      "label": "Sign Up",
+      "path": "/sign-up",
+      "hasChild": "false" 
+    }
+  ]
+}

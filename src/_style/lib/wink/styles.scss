@@ -1,0 +1,25 @@
+
+.wink-summary {
+  background-color: antiquewhite;
+}
+mark {
+  padding: 4px;
+  background-color: transparent;
+}
+mark.wink-focus {
+  transition: all 300ms ease;
+  opacity: 0.2;
+}
+
+mark.wink-focus:hover {
+  opacity: 1;
+}
+
+mark.wink-highlight {
+  border-radius: 2px;
+}
+
+mark.wink-hi-1 { background-color: #ffcc33; }
+mark.wink-hi-2 { background-color: #ffd662; }
+mark.wink-hi-3 { background-color: #ffdf89; }
+mark.wink-hi-4 { background-color: #ffe8af; }

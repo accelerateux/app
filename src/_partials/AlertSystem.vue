@@ -68,7 +68,7 @@ export default {
         alertsToAdd.forEach( (o) => { 
           setTimeout( () => { 
             showGrowl(o.id)
-          }, 10 );
+          }, 100 );
         });
       // if the store array is less than the local array, an alert was removed
       } else if( alertsData.value.length > _alerts.length ){
@@ -80,13 +80,13 @@ export default {
         alertsToRemove.forEach( (o) => { 
           setTimeout( () => {
             hideGrowl( o.id, () => { setAlertsData(_alerts) } )
-          }, 10 );
+          }, 100 );
         });
 
       }
     }
 
-    const setAlertsData = (_alerts) =>{
+    const setAlertsData = (_alerts) => {
       alertsData.value = _alerts;
     }
 

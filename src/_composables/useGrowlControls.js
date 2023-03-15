@@ -16,6 +16,7 @@ export function useGrowlControls() {
   const originStr = 'data-growl-origin';
 
   const showGrowl = (_id) => {
+    console.log('GROWL ID',_id);
     let growl = document.getElementById(_id);
 
     growl.setAttribute('aria-hidden', false);    

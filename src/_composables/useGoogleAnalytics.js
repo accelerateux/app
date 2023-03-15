@@ -84,7 +84,7 @@ export function useGoogleAnalytics() {
   }
 
   const getPageName = () => {
-    let pageName = window.location.href.split('fpac-design-system/')[1];
+    let pageName = window.location.href.split('.com/')[1];
     if(pageName == 'index.html' || pageName == '') pageName = 'home';
     return pageName;
   }

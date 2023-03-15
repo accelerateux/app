@@ -4,25 +4,26 @@ import { homeService } from '@/Home/_services/home.service';
 const state = () =>({
   isLoaded: false,
   errors: [],
-  data: []
+  future: ''
 });
   
 
 const getters = {
   isLoaded: state => state.isLoaded,
-  getErrors: state => state.errors
+  getErrors: state => state.errors,
+  getFuture: state => state.future
 };
 
 const actions = {
 
-  doAction( { commit, state, rootState }, payload ){
+  setFuture( { commit, state, rootState }, _payload ){
     commit('SET_ERRORS', []);
 
-    homeService.doNothing( (result) => {
-      if(result.errors){
-        commit('SET_ERRORS', result.errors);
+    homeService.getFuture( _payload, (_result) => {
+      if(_result.errors){
+        commit('SET_ERRORS', _result.errors);
       } else {
-        commit('DO_MUTATION', result.data );
+        commit('SET_FUTURE', _result.data );
       }
     });
   }
@@ -34,9 +35,8 @@ const mutations = {
     state.errors = payload;
   },
 
-  DO_MUTATION( state, payload ){
-    state.data = payload;
-    state.isLoaded = true;
+  SET_FUTURE( _state, _payload ){
+    _state.future = _payload;
   },
 
 };

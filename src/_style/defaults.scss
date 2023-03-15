@@ -1,2 +1,39 @@
 
 //$lead-max-width:                77rem !default;
+.ds-login {
+  width: $size-base * 100;
+  min-width: $size-base * 80;
+}
+
+.google-login {
+
+  & {
+    width: 100%;
+    border: 1px solid $color-fds-tertiary-200;
+    border-radius: $size-base;
+
+    &-container {
+      padding: $size-small;
+    }
+
+    &-icon {
+      margin-top: $size-small;
+      margin-left: $size-small;
+      width: $size-medium;
+      height: $size-medium;
+    }
+
+    &-text {
+      font-size: 1.75rem;
+      letter-spacing: 0.25px;
+      font-family: "Google Sans",arial,sans-serif;
+      font-weight: 500;
+      padding-right: $size-medium;
+      padding-left: 0;
+    }
+  }
+  
+}
+.google-login:hover {
+  background-color: $color-fds-white;
+}

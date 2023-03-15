@@ -42,40 +42,67 @@
         <div class="fds-section">
           <div class="fds-section__bd">
 
-            <div class="fds-level fds-level--gutter-m">
-              
-              <button @click="startListen()" type="button" class="fds-btn fds-btn--plain fds-p--s fds-radius--full fds-bg--tertiary-100 fds-color--primary fds-link:hover--primary fds-bg:hover--primary-100" title="Start Recording Audio" aria-label="Start Recording Audio">
-                <svg class="fds-icon fds-icon--size-2" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"></path></svg>
-              </button>
             
-              <button @click="stopListen()" type="button" class="fds-btn fds-btn--plain fds-p--s fds-radius--full fds-bg--tertiary-100 fds-color--red fds-link:hover--red fds-bg:hover--red-100" title="Stop Recording Audio" aria-label="Stop Recording Audio">
-                <svg class="fds-icon fds-icon--size-2" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"></path></svg>
-              </button>
 
-              <button @click="analyzeTranscript()" type="button" class="fds-btn fds-btn--secondary" title="Analyze Transcript" aria-label="Analyze Transcript">Analyze</button>
+            <div class="fds-m-t--l">
+              
+              <div class="fds-grid">
+                <div class="fds-grid__1/1 fds-grid__1/2@l">
                 
+                  <h3>Transcript</h3>
+                  <textarea class="fds-textarea" name="Name" placeholder="Transcript" rows="8">{{ fullTranscript }}</textarea>
+                  <div class="fds-m-t--m">
+                    
+                    <div class="fds-level fds-level--gutter-m">
+                      <button @click="startListen()" type="button" class="fds-btn fds-btn--plain fds-p--s fds-radius--full fds-bg--tertiary-100 fds-color--primary fds-link:hover--primary fds-bg:hover--primary-100" title="Start Recording Audio" aria-label="Start Recording Audio">
+                        <svg class="fds-icon fds-icon--size-2" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"></path></svg>
+                      </button>
+                    
+                      <button @click="stopListen()" type="button" class="fds-btn fds-btn--plain fds-p--s fds-radius--full fds-bg--tertiary-100 fds-color--red fds-link:hover--red fds-bg:hover--red-100" title="Stop Recording Audio" aria-label="Stop Recording Audio">
+                        <svg class="fds-icon fds-icon--size-2" aria-hidden="true" focusable="false" role="img" fill="#494440" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"></path></svg>
+                      </button>
+
+                      <button @click="analyzeTranscript()" type="button" class="fds-btn fds-btn--secondary" title="Analyze Transcript" aria-label="Analyze Transcript">Analyze</button>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="fds-grid__1/1 fds-grid__1/2@l">
+                  <div>
+                    <h3>Sentiment Score</h3>
+                    <div class="fds-field">
+                    <input v-model="sentimentScore" class="fds-input fds-field__item" id="sentimentScore-id" aria-required="true" name="sentimentScore-id" type="text">
+                    </div>
+                    <h3>Positive Words</h3>
+                    <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="3">{{ positiveWords }} - {{ negativeWords }}</textarea>
+                    <h3>Negative Words</h3>
+                    <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="3">{{ calculation }}</textarea>
+
+                  </div>
+                  
+                </div>
+              </div>
+              
             </div>
 
-            <div class="fds-m-t--l">
-              <h3>Transcript</h3>
-              <textarea class="fds-textarea" name="Name" placeholder="Transcript" rows="8">{{ fullTranscript }}</textarea>
-            </div>
-
-            <div class="fds-m-t--l">
-              <h3>Sentiment Analysis</h3>
-              <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="8">{{ transcriptSentiment }}</textarea>
-            </div>
           
-
           </div>
         </div>
+        <div class="fds-section">
+          <div class="fds-section__bd">
+            <div id="markUpId" class="fds-m-t--l">
+            </div>
+          </div>
+        </div>
+
+
       </main>
       <baseFooter></baseFooter>
   </div>
 </template>
 
 <script>
-import { defineAsyncComponent, ref, onMounted, onBeforeMount, computed } from "vue";
+import { defineAsyncComponent, ref, onMounted, onBeforeMount, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { useNavigation } from "@/_composables/useNavigation";
 //import { v4 as uuidv4 } from "uuid";
@@ -95,7 +122,23 @@ export default {
     const { goto } = useNavigation();
 
     const fullTranscript = computed(() => store.getters["speech/getTranscript"]);
-    const transcriptSentiment = ref('')
+    const nlpReport = computed(() => {
+      let data = store.getters['nlp/getCurrentReport'];
+      if(data) return data;
+      else return null;
+    });
+    const sentimentScore = ref();
+    const positiveWords = ref();
+    const negativeWords = ref();
+    const calculation = ref();
+    const markedUpText = computed(() => {
+      let data = store.getters['nlp/getMarkup'];
+      if(data){
+        doMarkup(data)
+      } else {
+        return null;
+      }
+    });
 
     const speechHandler = ( _evt ) => {
       let loudNoises = _evt.fullTranscript;
@@ -108,11 +151,43 @@ export default {
 
     const stopListen = () => {
       store.dispatch('speech/stopSpeechAPI');
+
     }
 
+    //const transcriptSentiment = ref('')
+    
     const analyzeTranscript = () => {
+      store.dispatch(
+        'nlp/analyzePhrase',
+        {
+          transcript: fullTranscript.value,
+          options: { extras: { 'cats': 5, 'amazing': 2 } }
+        }
+      );
+      store.dispatch(
+        'nlp/setMarkedUpText',
+        {
+          transcript: fullTranscript.value
+        }
+      );
+    }
+
+    const doMarkup = (_html=null) => {
+      if(_html){
+        console.log('_html',_html)
+        let prnt = document.getElementById('markUpId');
+        console.log('prnt',prnt)
+        prnt.innerHTML = _html; 
+      }
       
     }
+
+    watch( [nlpReport,markedUpText], (value1,value2) => {
+      sentimentScore.value = value1.normalizedScore;
+      positiveWords.value = value1.tokenizedPhrase;
+      negativeWords.value = value1.score;
+      calculation.value = value1;
+    })
 
     onBeforeMount(()=>{
       store.dispatch('speech/createSpeechAPI', {continous: true});
@@ -128,8 +203,13 @@ export default {
       startListen,
       stopListen,
       fullTranscript,
-      transcriptSentiment,
-      analyzeTranscript
+      analyzeTranscript,
+      sentimentScore,
+      positiveWords,
+      negativeWords,
+      calculation,
+      markedUpText,
+      doMarkup
     };
   }
 };

@@ -4,7 +4,8 @@ import { navigationService } from '@/Shared/_services/navigation.service';
 const state = () =>({
   isLoaded: false,
   errors: [],
-  data: [],
+  appNav: [],
+  publicNav: [],
   isMenuOpen: false,
   selectedMenu: ''
 });
@@ -13,7 +14,8 @@ const state = () =>({
 const getters = {
   isLoaded: state => state.isLoaded,
   getErrors: state => state.errors,
-  getNavigation: state => state.data,
+  getNavigation: state => state.appNav,
+  getNavigationPublic: state => state.publicNav,
   getIsMenuOpen: state => state.isMenuOpen,
   getSelectedMenu: state => state.selectedMenu
 };
@@ -28,6 +30,18 @@ const actions = {
         commit('SET_ERRORS', _result.errors);
       } else {
         commit('SET_NAV', _result.data );
+      }
+    });
+  },
+
+  setNavigationPublic( { commit, state, rootState }, _payload ){
+    commit('SET_ERRORS', []);
+
+    navigationService.getNavigationPublic( (_result) => {
+      if(_result.errors){
+        commit('SET_ERRORS', _result.errors);
+      } else {
+        commit('SET_NAV_PUBLIC', _result.data );
       }
     });
   },
@@ -48,7 +62,12 @@ const mutations = {
   },
 
   SET_NAV( _state, _navigation ){
-    _state.data = _navigation;
+    _state.appNav = _navigation;
+    _state.isLoaded = true;
+  },
+
+  SET_NAV_PUBLIC( _state, _navigation ){
+    _state.publicNav = _navigation;
     _state.isLoaded = true;
   },
 

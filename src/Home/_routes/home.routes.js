@@ -1,11 +1,17 @@
 
 export const homeRoutes = [
   { 
-    path: '/',
-    component: () => import('@/Home/_views/Home.vue')
+    path: '/dashboard',
+    component: () => import('@/Home/_views/Home.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   { 
     path: '/home',
-    component: () => import('@/Home/_views/Home.vue')
+    component: () => import('@/Home/_views/Home.vue'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
