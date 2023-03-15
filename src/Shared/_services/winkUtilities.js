@@ -1,4 +1,4 @@
-import { quantile } from "d3-array";
+//import { quantile } from "d3-array";
 
 let _doc = {};
 let _its = {};

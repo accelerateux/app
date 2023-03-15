@@ -10,7 +10,7 @@ import { router } from '@/_router.js';
 app.use(router);
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+//import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FB_API_KEY,
@@ -24,7 +24,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const fbApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(fbApp);
+//const analytics = getAnalytics(fbApp);
 app.use(fbApp);
 
 app.mount('#app');

@@ -16,14 +16,14 @@ const routes = [
     path: '/',
     component: () => import('@/_layouts/Public.vue'),
     children: [
-      ...publicRoutes,
-      { 
-        path: '/:pathMatch(.*)*',
-        name: 'not-found',
-        component: () => import('@/Shared/_views/NotFound.vue')
-      }
+      ...publicRoutes
     ]
-  }  
+  },
+  { 
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/Shared/_views/NotFound.vue')
+  }
 ];
 
 export const router = createRouter({

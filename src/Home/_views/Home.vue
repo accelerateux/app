@@ -74,9 +74,9 @@
                     <input v-model="sentimentScore" class="fds-input fds-field__item" id="sentimentScore-id" aria-required="true" name="sentimentScore-id" type="text">
                     </div>
                     <h3>Positive Words</h3>
-                    <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="3">{{ positiveWords }} - {{ negativeWords }}</textarea>
+                    <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="3">{{ positiveWords }}</textarea>
                     <h3>Negative Words</h3>
-                    <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="3">{{ calculation }}</textarea>
+                    <textarea class="fds-textarea" name="Name" placeholder="Sentiment" rows="3">{{ negativeWords }}</textarea>
 
                   </div>
                   
@@ -174,19 +174,16 @@ export default {
 
     const doMarkup = (_html=null) => {
       if(_html){
-        console.log('_html',_html)
         let prnt = document.getElementById('markUpId');
-        console.log('prnt',prnt)
         prnt.innerHTML = _html; 
       }
-      
     }
 
-    watch( [nlpReport,markedUpText], (value1,value2) => {
-      sentimentScore.value = value1.normalizedScore;
-      positiveWords.value = value1.tokenizedPhrase;
-      negativeWords.value = value1.score;
-      calculation.value = value1;
+    watch( nlpReport, (value) => {
+      console.log('value',value);
+      sentimentScore.value = (value.score > 0 ? 'Positive':'Negative') + ' - ('+(value.score*100)+')';
+      positiveWords.value = value;
+      negativeWords.value = value;
     })
 
     onBeforeMount(()=>{
@@ -207,7 +204,6 @@ export default {
       sentimentScore,
       positiveWords,
       negativeWords,
-      calculation,
       markedUpText,
       doMarkup
     };

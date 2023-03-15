@@ -65,9 +65,13 @@
 
 <script>
 import { v4 as uuidv4 } from "uuid";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { 
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup } from 'firebase/auth';
 import { useNavigation } from "@/_composables/useNavigation";
 import { useGrowlControls } from "@/_composables/useGrowlControls";
 import { useErrorState } from "@/_composables/useErrorState";
@@ -103,16 +107,34 @@ export default {
           })
           goto('/dashboard');
         }).catch((_err)=>{
+          let error = getErrorCode(_err.code);
           showErrorGrowl({
             title: 'Oh no!',
-            msg: getErrorCode(_err.code),
+            msg: error!=''? error : "Looks like something went wrong.",
             useIcon: 'true'
           })
         })
     }
 
     const signupWithGoogle = () => {
-
+      const provider = new GoogleAuthProvider();
+      signInWithPopup( auth, provider)
+        .then((_result)=>{
+          showSuccessGrowl({
+            title: 'Awesome!',
+            msg: 'Your account was created and is connected with Google.',
+            useIcon: 'true'
+          })
+          goto('/dashboard');
+        })
+        .catch((_err)=>{
+          let error = getErrorCode(_err.code);
+          showErrorGrowl({
+            title: "Hmmm, that didn't work.",
+            msg: error!=''? error : "Looks like something went wrong.",
+            useIcon: 'true'
+          })
+        })
     }
 
     const showPassword = () => {

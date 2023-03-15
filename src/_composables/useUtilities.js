@@ -95,6 +95,10 @@ export function useUtilities() {
     return num.toLocaleString('en-US', {style: "currency", currency: "USD", maximumSignificantDigits: 4});
   }
 
+  const checkOnProd = () => {
+    return ((window.location.href.indexOf('localhost:') > -1) || (window.location.href.indexOf('127.0.0.1:') > -1)) ? false : true;
+  }
+
   return {
     getClosest,
     getAnimationString,
@@ -104,6 +108,7 @@ export function useUtilities() {
     setPropertyFromId,
     setPropertyFromProperty,
     getFormatedDate,
-    getDollarsDisplay
+    getDollarsDisplay,
+    checkOnProd
   }
 }

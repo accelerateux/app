@@ -1,8 +1,12 @@
 import { fbApp, fbFunc, fbCall } from '@/_firebaseInit';
 
+import { useUtilities } from "@/_composables/useUtilities";
+const { checkOnProd } = useUtilities();
 
-const URL = 'http://localhost:5001/accelerate-ux-api/us-central1/getFuture';
-//const URL = 'https://us-central1-accelerate-ux-api.cloudfunctions.net/getWords';
+let URL = ''; 
+if( checkOnProd ) URL = 'https://us-central1-accelerate-ux-api.cloudfunctions.net/getFuture';
+else URL = 'http://localhost:5001/accelerate-ux-api/us-central1/getFuture';
+
 const HEADERS = new Headers();
 HEADERS.append(
   "Authorization",

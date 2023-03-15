@@ -1,3 +1,5 @@
+import { useUtilities } from '@/_composables/useUtilities';
+const { checkOnProd } = useUtilities();
 
 export function useGoogleAnalytics() {
 
@@ -100,10 +102,6 @@ export function useGoogleAnalytics() {
     } else {
       console.log('DEV GA TRACKING: ' + typ + " | " + cat + " | " + lab)
     }
-  }
-
-  const checkOnProd = () => {
-    return ((window.location.href.indexOf('localhost:') > -1) || (window.location.href.indexOf('127.0.0.1:') > -1)) ? false : true;
   }
   
   const init = (gaId) => {
